@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Property for Europe Customer. </description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_145573_zoho_assist.is_eu</name>
+        <read_roles/>
+        <suffix>is_eu</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-09-19 10:46:04</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>dca7b2e14fd90300e409f5a18110c799</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>x_145573_zoho_assist.is_eu</sys_name>
+        <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
+        <sys_update_name>sys_properties_dca7b2e14fd90300e409f5a18110c799</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-04 06:14:07</sys_updated_on>
+        <type>boolean</type>
+        <value/>
+        <write_roles>activity_admin,admin,agent_admin,approval_admin,assessment_admin,inventory_admin,itil_admin,oauth_admin,user_admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=dca7b2e14fd90300e409f5a18110c799"/>
+</record_update>

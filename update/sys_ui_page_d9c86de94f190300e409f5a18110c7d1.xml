@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var case_id=null,mode=null,loginWindow=null,interval=null,type="rs",domain="com";
+$(function() {
+	var customer_email=null,customer_name=null,ticket_no=null,ticket_subject=null,
+	technician_name=null,subdomain=null,department=null,
+	ZAT_DETAILS={},api_key=null;
+	case_id = $('#sys_id_input').val();
+	type = $('#sys_type_input').val();
+	initializeVariables(case_id);
+    window.addEventListener('message', handleSizingResponse, true);
+	var iframeEle = document.getElementById("assist-integration-iframe");
+	iframeEle.src = "https://assistinteg.localzoho."+domain+"/assist-integration?service_name=ServiceNow";
+});
+
+function initializeVariables(sys_id) {
+	// Technician Name using g_user
+	technician_name = g_user.fullName;
+	// Getting Incodent Records
+	var incident_record = new GlideRecord('incident');
+	incident_record.addQuery("sys_id",sys_id);
+	incident_record.query();
+	incident_record.next();
+	var caller_id = incident_record.caller_id;
+	ticket_no = incident_record.number;
+	ticket_subject = incident_record.short_description;
+	// Getting Caller Records
+	var caller_record = new GlideRecord('sys_user');
+	caller_record.addQuery("sys_id", caller_id);
+	caller_record.query();
+	caller_record.next();
+	customer_email = caller_record.email;
+	customer_name = caller_record.name;
+	// Getting Department Records
+	var department_record = new GlideRecord('cmn_department');
+	department_record.addQuery("sys_id", g_user.departmentID);
+	department_record.query();
+	department_record.next();
+	department = department_record.description;
+	if(ticket_subject!==null && ticket_subject.length>250){
+		ticket_subject= ticket_subject.substr(0,200);
+	}
+	if(customer_name!==null && customer_name.length>25){
+		customer_name=customer_name.substr(0,25);
+	}
+	if(ticket_no!==null && ticket_no.length>25){
+		ticket_no=ticket_no.substr(0,25);
+	}
+	// Getting system properties
+	var rec = new GlideRecord('sys_properties');
+	rec.addQuery('name', 'x_145573_zoho_assist.api_key');
+	rec.query();
+	if(rec.next()){
+		api_key = rec.value;
+	}
+	//Getting EU Property
+	rec = new GlideRecord('sys_properties');
+	rec.addQuery('name', 'x_145573_zoho_assist.is_eu');
+	rec.query();
+	if(rec.next()){
+		var flag = rec.value;
+		if(flag){
+			domain = "eu";
+		}
+	}
+	// Getting Subdomain from window location
+	subdomain = window.location.host;
+	subdomain = subdomain.replace(".service-now.com","");
+}
+
+var handleSizingResponse = function(e) { 
+    ZAT_DETAILS=e.data;
+    if(ZAT_DETAILS.signedIn===undefined){
+        return;
+    }
+    if(ZAT_DETAILS.signedIn){
+        if(ZAT_DETAILS.api_key===api_key){
+            if(ZAT_DETAILS.subdomain!==subdomain){
+                alert("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.");
+				GlideDialogWindow.get().destroy();
+                return;
+            }
+            if(ZAT_DETAILS.user.license_type==="FREE"){
+                alert("Upgrade your Zoho Assist pricing plan to enjoy zendesk services. You are in FREE Edition.");
+				GlideDialogWindow.get().destroy();
+                return;
+            }
+            if(!ZAT_DETAILS.enabled){
+                alert("Integration with Service Now has been disabled.Kindly contact your Administrator.");
+				GlideDialogWindow.get().destroy();
+				return;
+            }
+			if(ZAT_DETAILS.expires_in===0){
+				alert("Integration with zoho assist expired.Kindly re-configure it in Zoho Assist.Kindly contact your Administrator.");
+				GlideDialogWindow.get().destroy();
+                return;
+			}
+            if(ZAT_DETAILS.user.remote_support_license.is_enabled){
+                if(ZAT_DETAILS.session!==undefined){
+                    if(ZAT_DETAILS.session.success!==undefined){
+                        session_id=ZAT_DETAILS.session.success.representation.session_id;
+						if(loginWindow===null || loginWindow===undefined){
+							alert("Kindly check the popup blocker. Allow the Zoho Assist and refresh the page once.");
+							GlideDialogWindow.get().destroy();
+							return;
+						}
+                        loginWindow.location.href=ZAT_DETAILS.session.success.representation.technician_url;
+                    }else{
+                        loginWindow.close();
+                        var error=JSON.parse(ZAT_DETAILS.session.error);
+                        showError(error);
+                        if(interval!==null){
+                            clearInterval(interval);
+                            interval=null;
+                        }
+                        loginWindow=null;
+                    }
+                    delete ZAT_DETAILS['session'];
+					GlideDialogWindow.get().destroy();
+					document.location.reload(true);
+                }else{
+					loginWindow= window.open("","_blank");
+					getSessionAPI(type);
+				}
+            }
+            else{
+                alert("You do not have the permission to initiate a session.Kindly contact your Administrator.");
+                GlideDialogWindow.get().destroy();
+				document.location.reload(true);
+            }
+        }else if(ZAT_DETAILS.api_key===undefined){
+			alert("You have not configured Service Now Integration in Zoho Assist. Kindly check.");
+			GlideDialogWindow.get().destroy();
+			document.location.reload(true);
+		}
+		else if(api_key===""){
+			alert("It is found that Zoho Assist Api Key is empty in System Properties.");
+			GlideDialogWindow.get().destroy();
+			document.location.reload(true);
+		}
+		else{
+            alert("You're not part of Zoho Assist account that enables this integration.Kindly contact your Administrator.");
+			GlideDialogWindow.get().destroy();
+			document.location.reload(true);
+        }
+    }
+    else{
+        openLoginPage();
+		GlideDialogWindow.get().destroy();
+    }
+};
+
+function getSessionAPI(type){
+    var iframeVar=document.getElementById("assist-integration-iframe");
+    var data={
+        service_id: 'ServiceNow',
+        customer_email: customer_email,
+        customer_name: customer_name,
+        mail_subject: ticket_no,
+        mail_content: ticket_subject,
+        agent_name: technician_name,
+        department: department,
+		case_id: case_id,
+		type: type
+    };
+    var session_details={
+        session: data
+    };
+    iframeVar.contentWindow.postMessage(session_details,'*');
+}
+function openLoginPage(){
+    loginWindow = window.open("https://assistinteg.localzoho."+domain+"/html/blank.html","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=150,left=350,width=800,height=600");
+    if(interval!==null){
+        clearInterval(interval);
+        interval=null;
+    }
+	if(loginWindow===undefined || loginWindow===null){
+		alert("Kindly check the popup blocker. Allow the Zoho Assist and refresh the page once.");
+		GlideDialogWindow.get().destroy();
+		return;
+	}
+    interval = setInterval(function(){
+        if(loginWindow.closed){
+            clearInterval(interval);
+            loginWindow=null;
+			document.location.reload(true);
+            GlideDialogWindow.get().destroy();
+        }
+    },2000);
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_145573_zoho_assi_assist_iframe_ui_action.do</endpoint>
+        <html><![CDATA[<g:ui_form>
+	<link rel="stylesheet" href="https://sites.zoho.com/webfonts?family=Lato:300,300i,400,400i,600,600i,700,700i,900,900i"></link>
+	<link href="16694af34f700300e409f5a18110c7b5.cssdbx" rel="stylesheet" type="text/css"></link>
+	<g:include_script src="x_145573_zoho_assi.zoho_assist_jquery.jsdbx" />
+	<input type="hidden" id="sys_id_input" name="sys_id_input" value="${sysparm_id}" />
+	<input type="hidden" id="sys_type_input" name="sys_type_input" value="${sysparm_type}" />
+	<div id="content" style="width:100%;height:100%;background:white;border:0px;padding:20px;"><div class="preloader"></div></div>
+	<iframe id="assist-integration-iframe" style="border:0px;width:0px;height:0px;"></iframe>
+</g:ui_form>]]></html>
+        <name>assist_iframe_ui_action</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-09-19 05:03:25</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>d9c86de94f190300e409f5a18110c7d1</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>assist_iframe_ui_action</sys_name>
+        <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
+        <sys_update_name>sys_ui_page_d9c86de94f190300e409f5a18110c7d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-03 08:16:06</sys_updated_on>
+    </sys_ui_page>
+</record_update>

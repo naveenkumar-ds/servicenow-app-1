@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="System Properties">d546447bc0a8016900046469895b557a</application>
+        <assessment/>
+        <content_page/>
+        <device_type/>
+        <filter table="sys_properties">name=x_145573_zoho_assist.is_eu^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="=" or="false" value="x_145573_zoho_assist.is_eu"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <hint>For EU Customers</hint>
+        <homepage/>
+        <image/>
+        <link_type>DETAIL</link_type>
+        <map_page/>
+        <mobile_title>Zoho Assist EU</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>sys_properties</name>
+        <order>1</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <roles>activity_admin,admin,agent_admin,approval_admin,assessment_admin,itil_admin,inventory_admin,user_admin</roles>
+        <survey/>
+        <survey_overwrite>true</survey_overwrite>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-03 07:57:07</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>79079ac64f210300e409f5a18110c75c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Zoho Assist EU</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
+        <sys_update_name>sys_app_module_79079ac64f210300e409f5a18110c75c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-03 08:00:30</sys_updated_on>
+        <timeline_page/>
+        <title>Zoho Assist EU</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

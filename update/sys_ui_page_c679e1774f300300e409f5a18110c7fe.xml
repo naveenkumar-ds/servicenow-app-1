@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var case_id=null,mode=null,loginWindow=null,interval=null,domain="com";
+$(function() {
+	var customer_email=null,customer_name=null,ticket_no=null,ticket_subject=null,
+	technician_name=null,subdomain=null,department=null,
+	ZAT_DETAILS={},api_key=null;
+	case_id = $('#sys_id_input').val();
+	initializeVariables(case_id);
+    window.addEventListener('message', handleSizingResponse, true);
+	var iframeEle = document.getElementById("assist-integration-iframe");
+	iframeEle.src = "https://assistinteg.localzoho."+domain+"/assist-integration?service_name=ServiceNow";
+});
+
+function initializeVariables(sys_id) {
+	// Technician Name using g_user
+	technician_name = g_user.fullName;
+	// Getting Incodent Records
+	var incident_record = new GlideRecord('incident');
+	incident_record.addQuery("sys_id",sys_id);
+	incident_record.query();
+	incident_record.next();
+	var caller_id = incident_record.caller_id;
+	ticket_no = incident_record.number;
+	ticket_subject = incident_record.short_description;
+	// Getting Caller Records
+	var caller_record = new GlideRecord('sys_user');
+	caller_record.addQuery("sys_id", caller_id);
+	caller_record.query();
+	caller_record.next();
+	customer_email = caller_record.email;
+	customer_name = caller_record.name;
+	// Getting Department Records
+	var department_record = new GlideRecord('cmn_department');
+	department_record.addQuery("sys_id", g_user.departmentID);
+	department_record.query();
+	department_record.next();
+	department = department_record.description;
+	if(ticket_subject!==null && ticket_subject.length>250){
+		ticket_subject= ticket_subject.substr(0,200);
+	}
+	if(customer_name!==null && customer_name.length>25){
+		customer_name=customer_name.substr(0,25);
+	}
+	if(ticket_no!==null && ticket_no.length>25){
+		ticket_no=ticket_no.substr(0,25);
+	}
+	// Getting system properties
+	var rec = new GlideRecord('sys_properties');
+	rec.addQuery('name', 'x_145573_zoho_assist.api_key');
+	rec.query();
+	if(rec.next()){
+		api_key = rec.value;
+	}
+	rec = new GlideRecord('sys_properties');
+	rec.addQuery('name', 'x_145573_zoho_assist.is_eu');
+	rec.query();
+	if(rec.next()){
+		var flag = rec.value;
+		if(flag){
+			domain = "eu";
+		}
+	}
+	// Getting Subdomain from window location
+	subdomain = window.location.host;
+	subdomain = subdomain.replace(".service-now.com","");
+}
+
+var handleSizingResponse = function(e) { 
+    ZAT_DETAILS=e.data;
+    if(ZAT_DETAILS.signedIn===undefined){
+        return;
+    }
+	var context = null;
+    if(ZAT_DETAILS.signedIn){
+        if(ZAT_DETAILS.api_key===api_key){
+            if(ZAT_DETAILS.subdomain!==subdomain){
+                context = createParaContent("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.","");
+                $("#content").html(context);
+                return;
+            }
+            if(ZAT_DETAILS.user.license_type==="FREE"){
+                context = createParaContent("Upgrade your Zoho Assist pricing plan to enjoy service-now service.","");
+                $("#content").html(context+"<input type=\"button\" class=\"start-btn\" value=\"Upgrade\" onclick=\"openPage('https://www.zoho.com/assist/pricing.html')\" />");
+                return;
+            }
+            if(!ZAT_DETAILS.enabled){
+                context = createParaContent("Integration with service-now has been disabled.","Kindly contact your Administrator.");
+                $("#content").html(context);
+                return;
+            }
+			if(ZAT_DETAILS.expires_in===0){
+				context = createParaContent("Integration expired.Kindly re-configure it in Zoho Assist.","Kindly contact your Administrator.");
+                $("#content").html(context);
+                return;
+			}
+            if(ZAT_DETAILS.user.remote_support_license.is_enabled){
+                if(ZAT_DETAILS.session!==undefined){
+                    if(ZAT_DETAILS.session.success!==undefined){
+                        session_id=ZAT_DETAILS.session.success.representation.session_id;
+                        loginWindow.location.href=ZAT_DETAILS.session.success.representation.technician_url;
+                    }else{
+                        loginWindow.close();
+                        var error=JSON.parse(ZAT_DETAILS.session.error);
+                        showError(error);
+                        if(interval!==null){
+                            clearInterval(interval);
+                            interval=null;
+                        }
+                        loginWindow=null;
+                    }
+                    delete ZAT_DETAILS['session'];
+                }
+                context = createParaContent("Start a session to get connected to your remote customers instantly.", "");
+                $("#content").html(context+"<form id=\"TheForm\" name=\"TheForm\" method=\"get\" target=\"TheWindow\"></form><input type=\"button\" class=\"start-btn\" value=\"Start Remote Session\" onclick=\"getSessionAPI('rs')\" /><input type=\"button\" class=\"start-btn\" value=\"Share My Screen\" onclick=\"getSessionAPI('dm')\" />");
+            }
+            else{
+                context = createParaContent("You do not have the permission to initiate a session.","Kindly contact your Administrator.");
+                $("#content").html(context);
+            }
+        }else if(ZAT_DETAILS.api_key===undefined){
+			context = createParaContent("You have not configured service-now Integration in Zoho Assist.","");
+            $("#content").html(context+"<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more.</a>");
+		}
+		else if(api_key===""){
+			context = createParaContent("It is found that Zoho Assist Api Key is empty in System Properties.","");
+            $("#content").html(context+"<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more</a>");
+		}
+		else{
+            context = createParaContent("You're not part of Zoho Assist account that enables this integration.","Kindly contact your Administrator.");
+            $("#content").html(context);
+        }
+    }
+    else{
+        context = createParaContent("Start a session to get connected to your remote customers instantly.", "");
+        $("#content").html(context+"<input type=\"button\" class=\"start-btn\" value=\"Start Remote Session\" onclick=\"showLoginPage()\" /><input type=\"button\" class=\"start-btn\" value=\"Start Demo\" onclick=\"showLoginPage()\" />");
+    }
+	
+	if(ZAT_DETAILS.expires_in!==undefined){
+		var content = $('#content').html();
+		$('#content').html(content+"<br ><span class=\"para-three\">This integration will expire in <b>"+ZAT_DETAILS.expires_in+" </b>days.</span>");
+	}
+};
+
+function createParaContent(p1,p2) {
+	var paraContent1 = "<span class=\"para-one\">"+p1+"</span><br />";
+	var paraContent2 = "<span class=\"para-two\">"+p2+"</span>";
+	return paraContent1+paraContent2;
+}
+
+function getSessionAPI(type){
+    var iframeVar=document.getElementById("assist-integration-iframe");
+    var data={
+        service_id: 'ServiceNow',
+        customer_email: customer_email,
+        customer_name: customer_name,
+        mail_subject: ticket_no,
+        mail_content: ticket_subject,
+        agent_name: technician_name,
+        department: department,
+		case_id: case_id,
+		type: type
+    };
+    var session_details={
+        session: data
+    };
+    iframeVar.contentWindow.postMessage(session_details,'*');
+    loginWindow= window.open("","_blank");
+}
+function openLoginPage(){
+    loginWindow = window.open("https://assistinteg.localzoho."+domain+"/html/blank.html","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=150,left=350,width=800,height=600");
+    if(interval!==null){
+        clearInterval(interval);
+        interval=null;
+    }
+    interval = setInterval(function(){
+        if(loginWindow.closed){
+            clearInterval(interval);
+            loginWindow=null;
+            document.location.reload(true);
+        }
+    },2000);
+}
+
+function showLoginPage(){
+    var context = createParaContent("Looks like you haven't signed in to your account.","Please Login or Create an account.");
+    $("#content").html(context+"<br /><input type=\"button\" class=\"start-btn\" value=\"Log In\" onclick=\"openLoginPage()\" />");
+}
+
+function openPage(pageUrl){
+	window.open(pageUrl,"_blank");
+}
+
+function showError(data) {
+    var error_data = createParaContent("Error Code:"+data.error.code,"Error Message:"+data.error.message);
+    $("#content").html(error_data);
+}]]></client_script>
+        <description>For Calling Assist IFrame</description>
+        <direct>false</direct>
+        <endpoint>x_145573_zoho_assi_assist_iframe.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link rel="stylesheet" href="https://sites.zoho.com/webfonts?family=Lato:300,300i,400,400i,600,600i,700,700i,900,900i"></link>
+	<link href="16694af34f700300e409f5a18110c7b5.cssdbx" rel="stylesheet" type="text/css"></link>
+	<g:include_script src="x_145573_zoho_assi.zoho_assist_jquery.jsdbx" />
+	<input type="hidden" id="sys_id_input" name="sys_id_input" value="$[RP.getParameterValue('sysparm_id')]" />
+	<div id="content"><div class="preloader"></div></div>
+	<iframe id="assist-integration-iframe" width="0%" height="0%" style="border:0px;"></iframe>
+</j:jelly>]]></html>
+        <name>assist_iframe</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-09-01 09:51:34</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>c679e1774f300300e409f5a18110c7fe</sys_id>
+        <sys_mod_count>96</sys_mod_count>
+        <sys_name>assist_iframe</sys_name>
+        <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
+        <sys_update_name>sys_ui_page_c679e1774f300300e409f5a18110c7fe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-03 08:15:03</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="content_css">
+    <content_css action="INSERT_OR_UPDATE">
+        <name>assist_css_style</name>
+        <style>input,p,div,span,button{&#13;
+    font-family: Lato;&#13;
+}&#13;
+&#13;
+table{&#13;
+    background-color: transparent;&#13;
+    width: 100%;&#13;
+}&#13;
+&#13;
+th,td{&#13;
+    padding: 0;&#13;
+}&#13;
+&#13;
+*, *::after, *::before{&#13;
+    box-sizing: border-box;;&#13;
+}&#13;
+&#13;
+th{&#13;
+    text-align: center;&#13;
+    font-weight: 400 !important;&#13;
+}&#13;
+&#13;
+.data {&#13;
+    color: #363;&#13;
+    padding-left: 6px;&#13;
+}&#13;
+.start-btn{&#13;
+ background-color: #2682ea;&#13;
+ border:none;&#13;
+ border-radius: 2px;    &#13;
+ color: #fff;    &#13;
+ display: inline;    &#13;
+ font-size: 13px;    &#13;
+ padding: 0 20px;    &#13;
+ transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;    &#13;
+ height: 36px;      &#13;
+ position: relative;&#13;
+ margin: 15px 6px;&#13;
+ outline:none;&#13;
+}&#13;
+&#13;
+.daterangepicker .applybtn&#13;
+{&#13;
+    font-size: 12px;&#13;
+    line-height: 1.5;&#13;
+    padding: 5px 10px;&#13;
+    background-color: #1f8dd6;&#13;
+    border: 1px solid #1f8dd6;&#13;
+    border-radius: 2px;&#13;
+    color: #fff;&#13;
+    margin-right: 2px;&#13;
+}&#13;
+&#13;
+.daterangepicker .applybtn:disabled &#13;
+{&#13;
+    cursor: not-allowed;&#13;
+    opacity: .5;&#13;
+}&#13;
+&#13;
+.daterangepicker .cancelbtn&#13;
+{&#13;
+    background-color: #fff;&#13;
+    border: 1px solid #1f8dd6;&#13;
+    color: #1f8dd6;&#13;
+}&#13;
+.preloader{&#13;
+    margin-top: 25px;&#13;
+    width: 35px;&#13;
+    height: 35px;&#13;
+    display: inline-block;&#13;
+    padding: 0px;&#13;
+    border-radius: 100%;&#13;
+    border: 2px solid;&#13;
+    border-top-color: #f22927;&#13;
+    border-bottom-color: #feea4b;&#13;
+    border-left-color: #48ca32;&#13;
+    border-right-color: #2e7eae;&#13;
+    -webkit-animation: preloader 0.7s linear infinite;&#13;
+    animation: preloader 0.7s linear infinite;&#13;
+    animation-name: preloader;&#13;
+    animation-duration: 0.7s;&#13;
+    animation-timing-function: linear;&#13;
+    animation-delay: initial;&#13;
+    animation-iteration-count: infinite;&#13;
+    animation-direction: initial;&#13;
+    animation-fill-mode: initial;&#13;
+    animation-play-state: initial;&#13;
+}&#13;
+&#13;
+@keyframes preloader{&#13;
+    from {transform: rotate(0deg);}&#13;
+    to {transform: rotate(360deg);}&#13;
+}&#13;
+&#13;
+@-webkit-keyframes preloader{&#13;
+    from {-webkit-transform: rotate(0deg);}&#13;
+    to {-webkit-transform: rotate(360deg);}&#13;
+}&#13;
+&#13;
+#content{&#13;
+    text-align: center;&#13;
+    margin: 5px 0;&#13;
+}&#13;
+&#13;
+#TheForm{&#13;
+    margin: 0;&#13;
+}&#13;
+#content .para-one{&#13;
+    line-height: 24px;&#13;
+}&#13;
+&#13;
+#content .para-two{&#13;
+    margin-bottom: 15px !important;&#13;
+    color: #999;&#13;
+}&#13;
+&#13;
+#content .join-text-box{&#13;
+    padding: 15px 8px;&#13;
+    margin: 10px 0 0;&#13;
+}&#13;
+&#13;
+#content .copy-join-url-btn{&#13;
+     background-color: #2682ea;&#13;
+     border:none;&#13;
+     border-radius: 2px;    &#13;
+     color: #fff; &#13;
+     font-size: 13px;    &#13;
+     padding: 0 10px;    &#13;
+     transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;    &#13;
+     height: 32px;      &#13;
+     position: relative;&#13;
+     outline:none;&#13;
+     margin: 10px 0 0;&#13;
+}&#13;
+&#13;
+.user-content-center{&#13;
+    margin: 15%;&#13;
+}&#13;
+&#13;
+#tech-admin{&#13;
+    border: 1px solid #ddd;&#13;
+    width:720px;&#13;
+}&#13;
+&#13;
+#tech-admin thead{&#13;
+    font-size: 14px;&#13;
+    color:#333;&#13;
+    text-align: center;&#13;
+    background-color: #f7f7f7;&#13;
+}&#13;
+&#13;
+.border-bottom,#tech-admin thead{&#13;
+    border-bottom: 1px solid #ddd;&#13;
+}&#13;
+&#13;
+.tableheading{&#13;
+    padding: 10px 8px;&#13;
+}&#13;
+&#13;
+.border-right{&#13;
+    border-right: 1px solid #ddd;&#13;
+}&#13;
+&#13;
+.width-20{&#13;
+    width: 20%;&#13;
+}&#13;
+&#13;
+.width-16{&#13;
+    width: 16%;&#13;
+}&#13;
+&#13;
+.width-100{&#13;
+    width: 100%;&#13;
+}&#13;
+&#13;
+.font-size-13{&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+.filter-label{&#13;
+    padding: 5px 10px;&#13;
+    background-color: #ededed;&#13;
+    border-bottom: 1px solid #ccc;&#13;
+    font-weight: 600;&#13;
+    font-style: italic;&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+.member-email{&#13;
+    border-bottom: 2px solid #ddd;&#13;
+    text-align: left;&#13;
+    padding: 8px;&#13;
+    font-size: 14px;&#13;
+}&#13;
+&#13;
+.background-white{&#13;
+   background: white;&#13;
+}</style>
+        <sys_class_name>content_css</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-09-01 10:38:48</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>16694af34f700300e409f5a18110c7b5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>assist_css_style</sys_name>
+        <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
+        <sys_update_name>content_css_16694af34f700300e409f5a18110c7b5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-09-19 05:34:53</sys_updated_on>
+        <type>local</type>
+        <url/>
+    </content_css>
+</record_update>
