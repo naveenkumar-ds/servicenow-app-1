@@ -13,7 +13,7 @@ return j.call(r(a),c)})),b))for(;i>h;h++)b(a[h],c,g?d:d.call(a[h],h,b(a[h],c)));
         <sys_class_name>sys_ui_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-19 05:14:51</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>4abb656d4f190300e409f5a18110c786</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>x_145573_zoho_assi.zoho_assist_jquery</sys_name>

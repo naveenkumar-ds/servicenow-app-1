@@ -8,7 +8,7 @@
         <sys_class_name>sys_ui_formatter</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-01 11:23:48</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>3c93523b4f700300e409f5a18110c720</sys_id>
         <sys_mod_count>2</sys_mod_count>
         <sys_name>zoho_assist_incident_formatter</sys_name>

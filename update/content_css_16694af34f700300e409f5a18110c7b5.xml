@@ -203,7 +203,7 @@ th{&#13;
         <sys_class_name>content_css</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-01 10:38:48</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>16694af34f700300e409f5a18110c7b5</sys_id>
         <sys_mod_count>3</sys_mod_count>
         <sys_name>assist_css_style</sys_name>

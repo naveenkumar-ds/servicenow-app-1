@@ -10,7 +10,7 @@
         <sys_class_name>sys_ui_macro</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-01 11:25:32</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>a953def74f700300e409f5a18110c75f</sys_id>
         <sys_mod_count>14</sys_mod_count>
         <sys_name>zoho_assist_incident_formatter</sys_name>

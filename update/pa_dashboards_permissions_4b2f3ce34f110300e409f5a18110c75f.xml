@@ -10,7 +10,7 @@
         <sys_class_name>pa_dashboards_permissions</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-25 07:07:04</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>4b2f3ce34f110300e409f5a18110c75f</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>pa_admin</sys_name>
