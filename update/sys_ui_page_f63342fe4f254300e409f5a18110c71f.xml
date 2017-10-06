@@ -29,6 +29,8 @@ function updateSystemProperties(){
 		rec1.update();
 	}
 	
+	$("#success_msg").show().delay(3000).fadeOut();
+	
 	getSystemProperties();
 }
 
@@ -82,7 +84,8 @@ function getSystemProperties(){
 		</label>
 		<div style="clear: right;text-align: right;padding: 0;background: none;border-top: none;margin-bottom: 0;">
 			<button style="margin-left: 20px;padding: 5px 30px;" onclick="goBack();">Cancel</button>
-			<button style="margin-left: 20px;padding: 5px 30px;" onclick="updateSystemProperties();">Update</button>
+			<button style="margin-left: 20px;padding: 5px 30px;" onclick="updateSystemProperties();">Update</button><br />
+			<span style="clear:both;float:right;color:green;display:none;" id="success_msg">Updated Successfully.</span>
 		</div>
 		
 	</div>
@@ -94,7 +97,7 @@ function getSystemProperties(){
         <sys_created_on>2017-10-05 14:25:20</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>f63342fe4f254300e409f5a18110c71f</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>assist_setup_page</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -102,6 +105,6 @@ function getSystemProperties(){
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_f63342fe4f254300e409f5a18110c71f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-05 14:25:20</sys_updated_on>
+        <sys_updated_on>2017-10-06 06:18:07</sys_updated_on>
     </sys_ui_page>
 </record_update>

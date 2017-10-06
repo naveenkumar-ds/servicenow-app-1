@@ -75,26 +75,35 @@ var handleSizingResponse = function(e) {
     if(ZAT_DETAILS.signedIn===undefined){
         return;
     }
+	var context = null;
     if(ZAT_DETAILS.signedIn){
         if(ZAT_DETAILS.api_key===api_key){
             if(ZAT_DETAILS.subdomain!==subdomain){
-                alert("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.");
 				GlideDialogWindow.get().destroy();
+                alert("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.");
+                //context = createParaContent("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.","");
+                //$("#content").html(context);
                 return;
             }
             if(ZAT_DETAILS.user.license_type==="FREE"){
-                alert("Upgrade your Zoho Assist pricing plan to enjoy zendesk services. You are in FREE Edition.");
 				GlideDialogWindow.get().destroy();
+                alert("Upgrade your Zoho Assist pricing plan to enjoy ServiceNow services. You are in FREE Edition.");
+				 //context = createParaContent("Upgrade your Zoho Assist pricing plan to enjoy service-now service.","<br /><input type=\"button\" class=\"start-btn\" value=\"Upgrade\" onclick=\"openPage('https://www.zoho.com/assist/pricing.html')\" />");
+                //$("#content").html(context);
                 return;
             }
             if(!ZAT_DETAILS.enabled){
-                alert("Integration with Service Now has been disabled.Kindly contact your Administrator.");
 				GlideDialogWindow.get().destroy();
+                alert("Integration with ServiceNow has been disabled.Kindly contact your Administrator.");
+				//context = createParaContent("Integration with service-now has been disabled.","Kindly contact your Administrator.");
+                //$("#content").html(context);
 				return;
             }
 			if(ZAT_DETAILS.expires_in===0){
-				alert("Integration with zoho assist expired.Kindly re-configure it in Zoho Assist.Kindly contact your Administrator.");
 				GlideDialogWindow.get().destroy();
+				alert("Integration with Zoho Assist has expired.Kindly contact your Administrator to re-configure ServiceNow in Zoho Assist.");
+				//context = createParaContent("Integration expired.Kindly re-configure it in Zoho Assist.","Kindly contact your Administrator.");
+                //$("#content").html(context);
                 return;
 			}
             if(ZAT_DETAILS.user.remote_support_license.is_enabled){
@@ -126,29 +135,37 @@ var handleSizingResponse = function(e) {
 				}
             }
             else{
-                alert("You do not have the permission to initiate a session.Kindly contact your Administrator.");
-                GlideDialogWindow.get().destroy();
+				GlideDialogWindow.get().destroy();
+                alert("You do not have the permission to initiate a session. Kindly contact your Administrator.");
 				document.location.reload(true);
+				//context = createParaContent("You do not have the permission to initiate a session.","Kindly contact your Administrator.");
+                //$("#content").html(context);
             }
         }else if(ZAT_DETAILS.api_key===undefined){
-			alert("You have not configured Service Now Integration in Zoho Assist. Kindly check.");
 			GlideDialogWindow.get().destroy();
+			alert("You have not configured ServiceNow Integration in Zoho Assist. Kindly contact your Administrator to configure ServiceNow in Zoho Assist.");
 			document.location.reload(true);
+			//context = createParaContent("You have not configured service-now Integration in Zoho Assist.","");
+            //$("#content").html(context+"<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more.</a>");
 		}
 		else if(api_key===""){
-			alert("It is found that Zoho Assist Api Key is empty in System Properties.");
 			GlideDialogWindow.get().destroy();
+			alert("Go to Zoho Assist Setup and complete your installation process.");
 			document.location.reload(true);
+			//context = createParaContent("It is found that Zoho Assist Api Key is empty in System Properties.","<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more</a>");
+            //$("#content").html(context);
 		}
 		else{
-            alert("You're not part of Zoho Assist account that enables this integration.Kindly contact your Administrator.");
 			GlideDialogWindow.get().destroy();
+            alert("You're not part of Zoho Assist account that enables this integration. Kindly contact your Administrator.");
 			document.location.reload(true);
+			//context = createParaContent("You're not part of Zoho Assist account that enables this integration.","Kindly contact your Administrator.");
+            //$("#content").html(context);
         }
     }
     else{
-        openLoginPage();
 		GlideDialogWindow.get().destroy();
+        openLoginPage();
     }
 };
 
@@ -189,6 +206,22 @@ function openLoginPage(){
             GlideDialogWindow.get().destroy();
         }
     },2000);
+}
+
+function openPage(pageUrl){
+	window.open(pageUrl,"_blank");
+}
+
+function closeWindow(){
+	GlideDialogWindow.get().destroy();
+	return false;
+}
+
+function createParaContent(p1,p2) {
+	var paraContent1 = "<span class=\"para-one\">"+p1+"</span><br />";
+	var paraContent2 = "<span class=\"para-two\">"+p2+"</span><br /><br />";
+	var paraContent3 = "<div style=\"clear: right;text-align: right;padding: 0;background: none;border-top: none;margin-bottom: 0;\"><button style=\"margin-left: 20px;padding: 5px 30px;\" onclick=\"closeWindow();\">Close</button></div>";
+	return paraContent1+paraContent2+paraContent3;
 }]]></client_script>
         <description/>
         <direct>false</direct>
@@ -207,9 +240,9 @@ function openLoginPage(){
         <sys_class_name>sys_ui_page</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-19 05:03:25</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
+        <sys_customer_update>true</sys_customer_update>
         <sys_id>d9c86de94f190300e409f5a18110c7d1</sys_id>
-        <sys_mod_count>48</sys_mod_count>
+        <sys_mod_count>60</sys_mod_count>
         <sys_name>assist_iframe_ui_action</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -217,6 +250,6 @@ function openLoginPage(){
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_d9c86de94f190300e409f5a18110c7d1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-03 08:16:06</sys_updated_on>
+        <sys_updated_on>2017-10-06 06:04:04</sys_updated_on>
     </sys_ui_page>
 </record_update>

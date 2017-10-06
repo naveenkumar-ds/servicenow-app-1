@@ -92,7 +92,7 @@ var handleSizingResponse = function(e) {
                 return;
             }
 			if(ZAT_DETAILS.expires_in===0){
-				context = createParaContent("Integration expired.Kindly re-configure it in Zoho Assist.","Kindly contact your Administrator.");
+				context = createParaContent("Integration with Zoho Assist has expired.","Kindly contact your Administrator to re-configure Service Now in Zoho Assist.");
                 $("#content").html(context);
                 return;
 			}
@@ -121,11 +121,11 @@ var handleSizingResponse = function(e) {
                 $("#content").html(context);
             }
         }else if(ZAT_DETAILS.api_key===undefined){
-			context = createParaContent("You have not configured service-now Integration in Zoho Assist.","");
+			context = createParaContent("You have not configured ServiceNow Integration in Zoho Assist.","Kindly contact your Administrator to configure ServiceNow in Zoho Assist.");
             $("#content").html(context+"<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more.</a>");
 		}
 		else if(api_key===""){
-			context = createParaContent("It is found that Zoho Assist Api Key is empty in System Properties.","");
+			context = createParaContent("Go to Zoho Assist Setup and complete your installation process.","");
             $("#content").html(context+"<a href='https://www.zoho.com/assist/help/service-now.html' target='_blank'> Learn more</a>");
 		}
 		else{
@@ -214,9 +214,9 @@ function showError(data) {
         <sys_class_name>sys_ui_page</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-09-01 09:51:34</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
+        <sys_customer_update>true</sys_customer_update>
         <sys_id>c679e1774f300300e409f5a18110c7fe</sys_id>
-        <sys_mod_count>96</sys_mod_count>
+        <sys_mod_count>98</sys_mod_count>
         <sys_name>assist_iframe</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -224,6 +224,6 @@ function showError(data) {
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_c679e1774f300300e409f5a18110c7fe</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-03 08:15:03</sys_updated_on>
+        <sys_updated_on>2017-10-06 06:06:39</sys_updated_on>
     </sys_ui_page>
 </record_update>
