@@ -111,7 +111,7 @@ var handleSizingResponse = function(e) {
                     if(ZAT_DETAILS.session.success!==undefined){
                         session_id=ZAT_DETAILS.session.success.representation.session_id;
 						if(loginWindow===null || loginWindow===undefined){
-							alert("Kindly check the popup blocker. Allow the Zoho Assist and refresh the page once.");
+							alert("Please disable your browser's pop-up blocker to conduct remote support/screen sharing sessions.");
 							GlideDialogWindow.get().destroy();
 							return;
 						}
@@ -242,7 +242,7 @@ function createParaContent(p1,p2) {
         <sys_created_on>2017-09-19 05:03:25</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>d9c86de94f190300e409f5a18110c7d1</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>61</sys_mod_count>
         <sys_name>assist_iframe_ui_action</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -250,6 +250,6 @@ function createParaContent(p1,p2) {
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_d9c86de94f190300e409f5a18110c7d1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-06 06:04:04</sys_updated_on>
+        <sys_updated_on>2017-10-09 06:35:54</sys_updated_on>
     </sys_ui_page>
 </record_update>

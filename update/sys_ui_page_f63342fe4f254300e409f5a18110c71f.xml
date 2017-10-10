@@ -58,37 +58,76 @@ function getSystemProperties(){
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
 	<g:requires name="styles/heisenberg/heisenberg_all.css" includes="true"/>
+	<link rel="stylesheet" href="https://sites.zoho.com/webfonts?family=Lato:300,300i,400,400i,600,600i,700,700i,900,900i"></link>
+	<link href="16694af34f700300e409f5a18110c7b5.cssdbx" rel="stylesheet" type="text/css"></link>
 	<g:include_script src="x_145573_zoho_assi.zoho_assist_jquery.jsdbx" />
-              
-	<h5 style="margin-left: 30%;">INSTALLATION</h5>
-	<div style="float: left;width: 425px;padding: 25px;margin-left: 30%;border: 1px solid #1f8dd6;border-radius: 3px;box-sizing: border-box;">
-		<label style="position:relative;margin-bottom:9px;">
-			<span>
-				Api Key<abbr title="Required">*</abbr>
-			</span>
-			<span>
-				<input class="form-control" type="text" name="settings_api_key" id="settings_api_key" required="required" />
-				<span class="error-message"></span>
-			</span>
-			<p style="color:#888;">Get Your Api Key from Zoho Assist. (Settings-&gt;Integrations-&gt;ServiceNow)</p>
-		</label>
-		<label style="position:relative;margin-bottom:9px;">
-			<span>
-				<input type="checkbox" name="settings_is_eu" id="settings_is_eu" />
-			</span>
-			<span style="margin-left:2px;">
-				Are you using Zoho Assist EU?
-				<span class="error-message"></span>
-			</span>
-			<p style="color:#888;">Enable this checkbox if you are using the Europe datacenter of Zoho (assist.zoho.eu).</p>
-		</label>
-		<div style="clear: right;text-align: right;padding: 0;background: none;border-top: none;margin-bottom: 0;">
-			<button style="margin-left: 20px;padding: 5px 30px;" onclick="goBack();">Cancel</button>
-			<button style="margin-left: 20px;padding: 5px 30px;" onclick="updateSystemProperties();">Update</button><br />
-			<span style="clear:both;float:right;color:green;display:none;" id="success_msg">Updated Successfully.</span>
+    <div style="margin-top: 30px;margin-bottom: 35px;padding-bottom: 0;margin-left:30px;">
+			<div style="width: 60px;float:left;">
+				<div class="assist-icon" style="height:60px;"></div>
+			</div>
+			<div style="display: table-cell;vertical-align: middle;height: 100%;">
+			<div style="float: left;margin-left: 20px;color: #333;">
+			<h2 style="margin: 10px 0 5px 0;font-weight: 400;">Zoho Assist</h2>
+
+			<p style="font-size: 16px;line-height: 20px;margin-bottom: 10px;padding-right: 15px;">Instantly support customers located anywhere using Zoho Assist, a remote support and remote access software.$[SP]<a href="https://assist.zoho.com/help/zoho-desk.html" target="_blank">Learn more.</a></p>
+			</div>
+			</div>
 		</div>
-		
-	</div>
+		<div style="margin-left: 30px;box-sizing: border-box;clear:both;">
+			<div style="float: left;padding: 25px;border: 1px solid #ebebeb;background: #fcfcfc;border-radius: 3px;box-sizing: border-box;">
+				<h3 style="font-size: 14px;line-height: 1.5;margin: 0 0 20px;color: #000;">INSTALLATION</h3>
+				<label style="position:relative;margin-bottom:9px;">
+					<span style="line-height: 30px;">
+						Api Key<span style="color:red;">*</span>
+					</span>
+					<span style="line-height: 30px;">
+						<input class="form-control" type="text" name="settings_api_key" id="settings_api_key" required="required" />
+						<span class="error-message"></span>
+					</span>
+					<p style="color:#888;line-height: 30px;">Get Your Api Key from Zoho Assist. (Settings-&gt;Integrations-&gt;ServiceNow)</p>
+				</label><br />
+				<label style="position:relative;margin-bottom:9px;">
+					<input type="checkbox" name="settings_is_eu" id="settings_is_eu" style="margin-bottom:9px;margin-top:5px;line-height:20px;" />
+					<span style="margin-left:5px;line-height: 30px;">
+						Are you using Zoho Assist EU?
+						<span class="error-message"></span>
+					</span>
+					<p style="color:#888;line-height: 30px;">Enable this checkbox if you are using the Europe datacenter of Zoho (assist.zoho.eu).</p>
+				</label>
+				<div style="clear: right;text-align: right;padding: 0;background: none;border-top: none;margin-bottom: 0;margin-top:15px;">
+					<button style="margin-left: 20px;background-color: #fff;border:none;border-radius: 2px;color: #1f8dd6;display: inline; font-size: 13px;padding: 0 20px; transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;height: 36px;border: 1px solid #1f8dd6;" onclick="goBack();">Cancel</button>
+					<button style="margin-left: 10px;background-color: #1f8dd6;border:none;border-radius: 2px;color: #fff;display: inline; font-size: 13px;padding: 0 20px; transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;height: 36px;" onclick="updateSystemProperties();">Update</button><br />
+					<span style="clear:both;float:right;color:green;display:none;" id="success_msg">Updated Successfully.</span>
+				</div>
+			</div>
+			<div style="float: left;padding: 25px;width:450px;margin-left:50px;">
+				<div>
+					<h3 style="font-size: 14px;line-height: 1.5;margin: 0 0 20px;color: #000;">HOW TO INSTALL</h3>
+					<div>
+						<h4 style="line-height: 1.5;margin: 0 0 20px;color: #000;">To Configure Servicenow</h4>
+						<ul>
+						<li><p><a href="https://assist.zoho.com">Log in</a> $[SP] or $[SP] <a href="https://www.zoho.com/assist/signup.html?src=ServiceNow">Sign Up </a> $[SP] to Zoho Assist.</p></li>
+						<li><p>Navigate to$[SP]<strong>Settings</strong></p></li>
+						<li><p>In settings, goto$[SP]<strong>General $[SP]-&gt; Integrations</strong></p></li>
+						<li><p>Once the tab opens, click $[SP]<strong>Servicenow $[SP]-&gt;$[SP] CONFIGURE</strong></p></li>
+						<li><p>Enter the sub-domain and click $[SP]<strong>ENABLE</strong></p></li>
+						<li><p>Now enter your Servicenow credentials and click $[SP]<strong>Sign In</strong></p></li>
+						<li><p>Once you sign in you will be provided with an $[SP]<strong>API Key</strong></p></li>
+						</ul>
+
+						<h4 style="line-height: 1.5;margin: 40px 0 20px;color: #000;">To Install Zoho Assist</h4>
+
+						<ul>
+						<li><p>Get Zoho Assist app from $[SP]<strong>ServiceNow Store.</strong></p></li>
+						<li><p>Search for the $[SP]<strong>Zoho Assist Setup</strong>$[SP] module in Filter navigator.</p></li>
+						<li><p>Enter the $[SP]<strong>API key</strong>$[SP] provided in Zoho Assist.</p></li>
+						<li><p>Tick the checkbox if you have data center in $[SP]<strong>EU</strong>.</p></li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
 </j:jelly>]]></html>
         <name>assist_setup_page</name>
         <processing_script/>
@@ -97,7 +136,7 @@ function getSystemProperties(){
         <sys_created_on>2017-10-05 14:25:20</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>f63342fe4f254300e409f5a18110c71f</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>51</sys_mod_count>
         <sys_name>assist_setup_page</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -105,6 +144,6 @@ function getSystemProperties(){
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_f63342fe4f254300e409f5a18110c71f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-06 06:18:07</sys_updated_on>
+        <sys_updated_on>2017-10-10 11:54:35</sys_updated_on>
     </sys_ui_page>
 </record_update>
