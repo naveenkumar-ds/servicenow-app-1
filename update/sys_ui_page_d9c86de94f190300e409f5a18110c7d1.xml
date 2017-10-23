@@ -81,6 +81,7 @@ var handleSizingResponse = function(e) {
             if(ZAT_DETAILS.subdomain!==subdomain){
 				GlideDialogWindow.get().destroy();
                 alert("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.");
+				document.location.reload(true);
                 //context = createParaContent("Your subdomain mismatches. Your API key is registered with '"+ZAT_DETAILS.subdomain+"' subdomain.","");
                 //$("#content").html(context);
                 return;
@@ -88,6 +89,7 @@ var handleSizingResponse = function(e) {
             if(ZAT_DETAILS.user.license_type==="FREE"){
 				GlideDialogWindow.get().destroy();
                 alert("Upgrade your Zoho Assist pricing plan to enjoy ServiceNow services. You are in FREE Edition.");
+				document.location.reload(true);
 				 //context = createParaContent("Upgrade your Zoho Assist pricing plan to enjoy service-now service.","<br /><input type=\"button\" class=\"start-btn\" value=\"Upgrade\" onclick=\"openPage('https://www.zoho.com/assist/pricing.html')\" />");
                 //$("#content").html(context);
                 return;
@@ -95,6 +97,7 @@ var handleSizingResponse = function(e) {
             if(!ZAT_DETAILS.enabled){
 				GlideDialogWindow.get().destroy();
                 alert("Integration with ServiceNow has been disabled.Kindly contact your Administrator.");
+				document.location.reload(true);
 				//context = createParaContent("Integration with service-now has been disabled.","Kindly contact your Administrator.");
                 //$("#content").html(context);
 				return;
@@ -102,17 +105,25 @@ var handleSizingResponse = function(e) {
 			if(ZAT_DETAILS.expires_in===0){
 				GlideDialogWindow.get().destroy();
 				alert("Integration with Zoho Assist has expired.Kindly contact your Administrator to re-configure ServiceNow in Zoho Assist.");
+				document.location.reload(true);
 				//context = createParaContent("Integration expired.Kindly re-configure it in Zoho Assist.","Kindly contact your Administrator.");
                 //$("#content").html(context);
                 return;
 			}
             if(ZAT_DETAILS.user.remote_support_license.is_enabled){
+				if(ZAT_DETAILS.user.remote_support_license.edition!=="PROFESSIONAL" && type==="dm"){
+					alert("You are in STANDARD edition. Two way screen sharing is on PROFESSIONAL edition. Kindly upgrade your plan to enjoy Screen Sharing.");
+					GlideDialogWindow.get().destroy();
+					document.location.reload(true);
+					return;
+				}
                 if(ZAT_DETAILS.session!==undefined){
                     if(ZAT_DETAILS.session.success!==undefined){
                         session_id=ZAT_DETAILS.session.success.representation.session_id;
 						if(loginWindow===null || loginWindow===undefined){
 							alert("Please disable your browser's pop-up blocker to conduct remote support/screen sharing sessions.");
 							GlideDialogWindow.get().destroy();
+							document.location.reload(true);
 							return;
 						}
                         loginWindow.location.href=ZAT_DETAILS.session.success.representation.technician_url;
@@ -242,7 +253,7 @@ function createParaContent(p1,p2) {
         <sys_created_on>2017-09-19 05:03:25</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>d9c86de94f190300e409f5a18110c7d1</sys_id>
-        <sys_mod_count>61</sys_mod_count>
+        <sys_mod_count>63</sys_mod_count>
         <sys_name>assist_iframe_ui_action</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -250,6 +261,6 @@ function createParaContent(p1,p2) {
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_d9c86de94f190300e409f5a18110c7d1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-09 06:35:54</sys_updated_on>
+        <sys_updated_on>2017-10-23 06:28:44</sys_updated_on>
     </sys_ui_page>
 </record_update>

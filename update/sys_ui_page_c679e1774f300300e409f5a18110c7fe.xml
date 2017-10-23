@@ -70,6 +70,7 @@ function initializeVariables(sys_id) {
 
 var handleSizingResponse = function(e) { 
     ZAT_DETAILS=e.data;
+	console.log(ZAT_DETAILS);
     if(ZAT_DETAILS.signedIn===undefined){
         return;
     }
@@ -114,7 +115,11 @@ var handleSizingResponse = function(e) {
                     delete ZAT_DETAILS['session'];
                 }
                 context = createParaContent("Start a Zoho Assist session to support your customers in real-time.", "");
-                $("#content").html(context+"<form id=\"TheForm\" name=\"TheForm\" method=\"get\" target=\"TheWindow\"></form><input type=\"button\" class=\"start-btn\" value=\"Remote Support\" onclick=\"getSessionAPI('rs')\" /><input type=\"button\" class=\"start-btn\" value=\"Screen Sharing\" onclick=\"getSessionAPI('dm')\" />");
+				var session_ui = context+"<form id=\"TheForm\" name=\"TheForm\" method=\"get\" target=\"TheWindow\"></form><input type=\"button\" class=\"start-btn\" value=\"Remote Support\" onclick=\"getSessionAPI('rs')\" />";
+				if(ZAT_DETAILS.user.remote_support_license.edition==="PROFESSIONAL"){
+					session_ui = session_ui+ "<input type=\"button\" class=\"start-btn\" value=\"Screen Sharing\" onclick=\"getSessionAPI('dm')\" />";
+				}
+                $("#content").html(session_ui);
             }
             else{
                 context = createParaContent("You do not have the permission to initiate a session.","Kindly contact your Administrator.");
@@ -216,7 +221,7 @@ function showError(data) {
         <sys_created_on>2017-09-01 09:51:34</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>c679e1774f300300e409f5a18110c7fe</sys_id>
-        <sys_mod_count>102</sys_mod_count>
+        <sys_mod_count>104</sys_mod_count>
         <sys_name>assist_iframe</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -224,6 +229,6 @@ function showError(data) {
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_c679e1774f300300e409f5a18110c7fe</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-09 06:34:54</sys_updated_on>
+        <sys_updated_on>2017-10-23 06:15:08</sys_updated_on>
     </sys_ui_page>
 </record_update>
