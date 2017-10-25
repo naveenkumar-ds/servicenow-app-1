@@ -6,6 +6,18 @@
 	getSystemProperties();
 });
 
+
+function showPreloader(){
+	document.getElementById("assist_installation").style.opacity=0.5;
+	setTimeout(function(){
+		updateSystemProperties();
+	},1000);
+}
+
+function hidePreloader(){
+	$("#update_loader").hide();
+}
+
 function goBack() {
     window.history.back();
 }
@@ -20,7 +32,6 @@ function updateSystemProperties(){
 		rec.value = assist_api_key;
 		rec.update();
 	}
-	
 	var rec1 = new GlideRecord('sys_properties');
 	rec1.addQuery('name', 'x_145573_zoho_assist.is_eu');
 	rec1.query();
@@ -28,7 +39,6 @@ function updateSystemProperties(){
 		rec1.value = assist_eu_flag;
 		rec1.update();
 	}
-	
 	$("#success_msg").show().delay(3000).fadeOut();
 	
 	getSystemProperties();
@@ -50,6 +60,7 @@ function getSystemProperties(){
 		eu_flag = rec1.value;
 		$('#settings_is_eu').prop('checked', eu_flag);
 	}
+	document.getElementById("assist_installation").style.opacity=1.0;
 }
 ]]></client_script>
         <description/>
@@ -61,7 +72,7 @@ function getSystemProperties(){
 	<link rel="stylesheet" href="https://sites.zoho.com/webfonts?family=Lato:300,300i,400,400i,600,600i,700,700i,900,900i"></link>
 	<link href="16694af34f700300e409f5a18110c7b5.cssdbx" rel="stylesheet" type="text/css"></link>
 	<g:include_script src="x_145573_zoho_assi.zoho_assist_jquery.jsdbx" />
-    <div style="margin-top: 30px;margin-bottom: 35px;padding-bottom: 0;margin-left:30px;">
+    <div style="margin-top: 30px;margin-bottom: 35px;padding-bottom: 0;margin-left:30px;" >
 			<div style="width: 60px;float:left;">
 				<div class="assist-icon" style="height:60px;"></div>
 			</div>
@@ -74,7 +85,7 @@ function getSystemProperties(){
 			</div>
 		</div>
 		<div style="margin-left: 30px;box-sizing: border-box;clear:both;">
-			<div style="float: left;padding: 25px;border: 1px solid #ebebeb;background: #fcfcfc;border-radius: 3px;box-sizing: border-box;width:45%; max-width:450px;">
+			<div style="float: left;padding: 25px;border: 1px solid #ebebeb;background: #fcfcfc;border-radius: 3px;box-sizing: border-box;width:45%; max-width:450px;" id="assist_installation">
 				<h3 style="font-size: 14px;line-height: 1.5;margin: 0 0 20px;color: #000;">INSTALLATION</h3>
 				<label style="position:relative;margin-bottom:9px;">
 					<span style="line-height: 30px;">
@@ -96,7 +107,8 @@ function getSystemProperties(){
 				</label>
 				<div style="clear: right;text-align: right;padding: 0;background: none;border-top: none;margin-bottom: 0;margin-top:15px;">
 					<button style="margin-left: 20px;background-color: #fff;border:none;border-radius: 2px;color: #1f8dd6;display: inline; font-size: 13px;padding: 0 20px; transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;height: 36px;border: 1px solid #1f8dd6;" onclick="goBack();">Cancel</button>
-					<button style="margin-left: 10px;background-color: #1f8dd6;border:none;border-radius: 2px;color: #fff;display: inline; font-size: 13px;padding: 0 20px; transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;height: 36px;" onclick="updateSystemProperties();">Update</button><br />
+					<button style="margin-left: 10px;background-color: #1f8dd6;border:none;border-radius: 2px;color: #fff;display: inline; font-size: 13px;padding: 0 20px; transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;height: 36px;" onclick="showPreloader();">Update</button>
+					<br />
 					<span style="clear:both;float:right;color:green;display:none;" id="success_msg">Updated Successfully.</span>
 				</div>
 			</div>
@@ -136,7 +148,7 @@ function getSystemProperties(){
         <sys_created_on>2017-10-05 14:25:20</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>f63342fe4f254300e409f5a18110c71f</sys_id>
-        <sys_mod_count>59</sys_mod_count>
+        <sys_mod_count>91</sys_mod_count>
         <sys_name>assist_setup_page</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -144,6 +156,6 @@ function getSystemProperties(){
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_f63342fe4f254300e409f5a18110c71f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-16 07:30:46</sys_updated_on>
+        <sys_updated_on>2017-10-25 08:47:41</sys_updated_on>
     </sys_ui_page>
 </record_update>
