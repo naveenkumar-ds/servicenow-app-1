@@ -146,7 +146,7 @@ function getSystemProperties(){
         <sys_class_name>sys_ui_page</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-10-05 14:25:20</sys_created_on>
-        <sys_customer_update>true</sys_customer_update>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>f63342fe4f254300e409f5a18110c71f</sys_id>
         <sys_mod_count>91</sys_mod_count>
         <sys_name>assist_setup_page</sys_name>
