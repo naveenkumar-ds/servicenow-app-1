@@ -11,7 +11,7 @@ $(function() {
 	initializeVariables(case_id);
     window.addEventListener('message', handleSizingResponse, true);
 	var iframeEle = document.getElementById("assist-integration-iframe");
-	iframeEle.src = "https://stageassist.zoho."+domain+"/assist-integration?service_name=ServiceNow";
+	iframeEle.src = "https://assist.zoho."+domain+"/assist-integration?service_name=ServiceNow";
 });
 
 function initializeVariables(sys_id) {
@@ -175,7 +175,7 @@ function getSessionAPI(type){
     loginWindow= window.open("","_blank");
 }
 function openLoginPage(){
-    loginWindow = window.open("https://stageassist.zoho."+domain+"/html/blank.html","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=150,left=350,width=800,height=600");
+    loginWindow = window.open("https://assist.zoho."+domain+"/html/blank.html","_blank","toolbar=yes,scrollbars=yes,resizable=yes,top=150,left=350,width=800,height=600");
     if(interval!==null){
         clearInterval(interval);
         interval=null;
@@ -221,7 +221,7 @@ function showError(data) {
         <sys_created_on>2017-09-01 09:51:34</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>c679e1774f300300e409f5a18110c7fe</sys_id>
-        <sys_mod_count>105</sys_mod_count>
+        <sys_mod_count>106</sys_mod_count>
         <sys_name>assist_iframe</sys_name>
         <sys_package display_value="zoho_assist_remote_support" source="x_145573_zoho_assi">d35925f34f300300e409f5a18110c766</sys_package>
         <sys_policy/>
@@ -229,6 +229,6 @@ function showError(data) {
         <sys_scope display_value="zoho_assist_remote_support">d35925f34f300300e409f5a18110c766</sys_scope>
         <sys_update_name>sys_ui_page_c679e1774f300300e409f5a18110c7fe</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-10-30 06:41:41</sys_updated_on>
+        <sys_updated_on>2017-11-02 07:17:21</sys_updated_on>
     </sys_ui_page>
 </record_update>
