@@ -36,3 +36,8 @@ Reduce your incident resolution time by accessing the remote screen in real-time
   1. IT support reps can fix computer issues, deploy patches by taking remote control over their PCs, Android Devices or iOS both inside and outside LAN. They can also train users on fixing issues and managing their computers.
   2. MSPs can manage their customer relationships better and resolve support tickets faster with attended support sessions that work across major firewalls and proxies.
   3. Customer support teams needn't rely on phone calls and infinite email loops to understand the issue. Troubleshoot and fix customer issues quicker by viewing and taking control of their remote computers.
+
+* Release Notes
+  1. Instant Remote Support and Screen Sharing right from incidents.
+  2. Update incident state and description at the end of every support session.
+  3. Store session details within corresponding incidents.
